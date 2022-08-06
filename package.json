@@ -1,0 +1,8 @@
+{
+  "name": "estore",
+  "version": "1.0.0",
+  "description": "An ecommerce store monorepo being managed by moon.",
+  "keywords": [],
+  "author": "James Sinkala <xinnks@gmail.com> (https://jamesinkala.com)",
+  "license": "Apache-2.0"
+}
