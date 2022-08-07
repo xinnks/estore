@@ -1,0 +1,17 @@
+---
+language: javascript
+tasks:
+  build:
+    command: vite
+    args:
+      - build
+    inputs:
+      - "**/*"
+    type: node
+  dev:
+    command: vite
+    inputs:
+      - "**/*"
+    options:
+      runInCI: false
+    type: node

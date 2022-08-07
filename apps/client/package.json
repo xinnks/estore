@@ -1,0 +1,30 @@
+{
+  "name": "estore-client",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "pnpm lint && pnpm format && vite build",
+    "dev": "concurrently \"pnpm lint\" \"pnpm format\" \"vite --port 3000\"",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier . --write",
+    "preview": "vite preview"
+  },
+  "license": "Apache-2.0",
+  "author": "James Sinkala <xinnks@gmail.com> (https://jamesinkala.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xinnks/estore-client.git"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.0",
+    "concurrently": "^7.2.2",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "vite": "^3.0.0"
+  }
+}
