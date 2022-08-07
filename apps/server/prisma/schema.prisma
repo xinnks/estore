@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./estore.db"
+}
+
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String?
+  articles  Article[]
+}
+
+model Article {
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  name          String
+  price         Float
+  image         String?
+  details       String?
+  soldOut       Boolean  @default(false)
+  category      Category?    @relation(fields: [categoryId], references: [id])
+  categoryId    Int?
+}

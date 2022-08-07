@@ -1,0 +1,45 @@
+---
+language: javascript
+tasks:
+  build:
+    command: node
+    args:
+      - src/index.js
+    deps:
+      - "~:build-dep1"
+    inputs:
+      - "**/*"
+    type: node
+  build-dep1:
+    command: init
+    inputs:
+      - "**/*"
+    type: node
+  dev:
+    command: node
+    args:
+      - src/index.js
+    deps:
+      - "~:dev-dep1"
+    inputs:
+      - "**/*"
+    options:
+      runInCI: false
+    type: node
+  dev-dep1:
+    command: init
+    inputs:
+      - "**/*"
+    type: node
+  init:
+    command: pnpm
+    args:
+      - dlx
+      - prisma
+      - migrate
+      - dev
+      - "--name"
+      - init
+    inputs:
+      - "**/*"
+    type: node

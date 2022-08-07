@@ -1,0 +1,35 @@
+{
+  "name": "estore-server",
+  "private": true,
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "concurrently \"pnpm lint\" \"pnpm format\" \"pnpm serve\"",
+    "format": "prettier . --write",
+    "lint": "eslint --ext .js --ignore-path .gitignore --fix src",
+    "prisma:init": "pnpm dlx prisma migrate dev --name init",
+    "serve": "nodemon"
+  },
+  "license": "Apache-2.0",
+  "author": "James Sinkala <xinnks@gmail.com> (https://jamesinkala.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xinnks/estore-server.git"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.1.1",
+    "express": "4.18.1",
+    "nodemon": "^2.0.18"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "prisma": "^4.1.1"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
