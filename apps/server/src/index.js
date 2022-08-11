@@ -1,153 +1,108 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
+const cors = require("cors");
 
+const port = 5000;
 const prisma = new PrismaClient();
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
-app.post(`/signup`, async (req, res) => {
-  const { name, email, posts } = req.body;
+app.get("/", (req, res) => {
+  res.json({
+    message: "Estore Server",
+  });
+});
 
-  const postData = posts
-    ? posts.map((post) => {
-        return { title: post.title, content: post.content || undefined };
-      })
-    : [];
-
-  const result = await prisma.user.create({
+app.post(`/category`, async (req, res) => {
+  const { name } = req.body;
+  const result = await prisma.category.create({
     data: {
       name,
-      email,
-      posts: {
-        create: postData,
-      },
     },
   });
   res.json(result);
 });
 
-app.post(`/post`, async (req, res) => {
-  const { title, content, authorEmail } = req.body;
-  const result = await prisma.post.create({
-    data: {
-      title,
-      content,
-      author: { connect: { email: authorEmail } },
-    },
-  });
-  res.json(result);
-});
-
-app.put("/post/:id/views", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const post = await prisma.post.update({
-      where: { id: Number(id) },
-      data: {
-        viewCount: {
-          increment: 1,
-        },
-      },
+app.post(`/article`, async (req, res) => {
+  const { name, price, image, details, categoryId } = req.body;
+  if (!name || !price || !image || !categoryId)
+    return res.status(422).json({
+      message: "Missing fields",
     });
-
-    res.json(post);
-  } catch (error) {
-    res.json({ error: `Post with ID ${id} does not exist in the database` });
-  }
+  const result = await prisma.article.create({
+    data: {
+      name,
+      price,
+      image,
+      details,
+      categoryId,
+    },
+  });
+  res.json(result);
 });
 
-app.put("/publish/:id", async (req, res) => {
+app.put("/sold-out/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const postData = await prisma.post.findUnique({
+    const articleData = await prisma.article.findUnique({
       where: { id: Number(id) },
       select: {
-        published: true,
+        soldOut: true,
       },
     });
 
-    const updatedPost = await prisma.post.update({
+    const updatedArticle = await prisma.article.update({
       where: { id: Number(id) || undefined },
-      data: { published: !postData.published || undefined },
+      data: { soldOut: !articleData.soldOut || undefined },
     });
-    res.json(updatedPost);
+    res.json(updatedArticle);
   } catch (error) {
     res.json({ error: `Post with ID ${id} does not exist in the database` });
   }
 });
 
-app.delete(`/post/:id`, async (req, res) => {
+app.get("/articles", async (req, res) => {
+  const articles = await prisma.article.findMany();
+  res.json(articles);
+});
+
+app.get(`/article/:id`, async (req, res) => {
   const { id } = req.params;
-  const post = await prisma.post.delete({
+  const article = await prisma.article.findUnique({
     where: {
       id: Number(id),
     },
+    include: { category: true },
   });
-  res.json(post);
+  res.json(article);
 });
 
-app.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany();
-  res.json(users);
+app.get("/categories", async (req, res) => {
+  const categories = await prisma.category.findMany();
+  res.json(categories);
 });
 
-app.get("/user/:id/drafts", async (req, res) => {
+app.get("/category/:id", async (req, res) => {
   const { id } = req.params;
 
-  const drafts = await prisma.user
-    .findUnique({
-      where: {
-        id: Number(id),
-      },
-    })
-    .posts({
-      where: { published: false },
-    });
-
-  res.json(drafts);
-});
-
-app.get(`/post/:id`, async (req, res) => {
-  const { id } = req.params;
-
-  const post = await prisma.post.findUnique({
-    where: { id: Number(id) },
-  });
-  res.json(post);
-});
-
-app.get("/feed", async (req, res) => {
-  const { searchString, skip, take, orderBy } = req.query;
-
-  const or = searchString
-    ? {
-        OR: [
-          { title: { contains: searchString } },
-          { content: { contains: searchString } },
-        ],
-      }
-    : {};
-
-  const posts = await prisma.post.findMany({
+  const articles = await prisma.article.findMany({
     where: {
-      published: true,
-      ...or,
+      categoryId: Number(id),
     },
-    include: { author: true },
-    take: Number(take) || undefined,
-    skip: Number(skip) || undefined,
-    orderBy: {
-      updatedAt: orderBy || undefined,
-    },
+    include: { category: true },
   });
+  const category = articles[0]?.category;
 
-  res.json(posts);
+  res.json({
+    category,
+    articles,
+  });
 });
 
-app.listen(3000, () =>
+app.listen(port, () =>
   console.log(`
 🚀 Server ready at: http://localhost:3000
 ⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`)
