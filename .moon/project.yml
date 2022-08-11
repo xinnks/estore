@@ -42,31 +42,24 @@ fileGroups:
 # This setting requires a map, where the key is a unique name for the task,
 # and the value is an object of task parameters.
 tasks:
+  install:
+    command: 'pnpm'
+    args: 'install'
+    type: 'node'
   # Name of the task.
-  noop:
+  format:
     # The name of the binary/command on your system.
-    command: 'noop'
-
+    command: 'prettier'
     # List of arguments to pass on the command line when executing the task.
-    args: []
-
-    # List of targets that will be executed *before* this task.
-    deps: []
-
-    # Map of environment variables to pass when executing the command.
-    env: {}
-
-    # List of file paths/globs to calculate whether to execute the task based on files
-    # that have been modified since the last time the task has been ran. By default inputs are
-    # relative from the *project root*, and can reference file groups (above). To reference files
-    # from the workspace root (for example, config files), prefix the path with a "/".
-    inputs: []
-
-    # List of files and folders that are created as a result of executing this task,
-    # excluding cache related items. By default outputs are relative from the *project root*.
-    # To output files to the workspace root, prefix the path with a "/".
-    outputs: []
-
+    args: '--write .'
     # The type of command to run, and where to locate it.
     # Accepts "node" (default) or "system".
+    type: 'node'
+  lint:
+    command: 'eslint'
+    args:
+      - --ignore-path
+      - .gitignore
+      - --fix
+      - src
     type: 'node'
