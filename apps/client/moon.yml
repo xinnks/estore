@@ -9,13 +9,13 @@ project:
 language: javascript
 tasks:
   lint:
-    command: 'eslint'
+    command: "eslint"
     args:
       - --ext
       - .js,.vue
-    type: 'node'
+    type: "node"
     options:
-      mergeArgs: 'prepend'
+      mergeArgs: "prepend"
   dev:
     command: vite
     args: "--port 3000"

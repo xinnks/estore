@@ -118,10 +118,10 @@ const open = ref(false);
               <router-link to="/">
                 <span class="sr-only">Workflow</span>
                 <svg
+                  id="svg5"
                   class="h-10 w-10"
                   aria-hidden="true"
                   viewBox="0 0 256 256"
-                  id="svg5"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:svg="http://www.w3.org/2000/svg"
                 >
@@ -132,9 +132,9 @@ const open = ref(false);
                       inkscape:swatch="solid"
                     >
                       <stop
+                        id="stop4847"
                         style="stop-color: #16aa9a; stop-opacity: 1"
                         offset="0"
-                        id="stop4847"
                       />
                     </linearGradient>
                   </defs>
@@ -173,6 +173,7 @@ const open = ref(false);
                       d="M 237.40515,61.346127 8.6340981,81.545926 C 3.0599065,95.934658 0,111.59617 0,127.99994 c 0,70.912 57.087939,127.99993 127.99994,127.99993 70.912,0 127.99993,-57.08793 127.99993,-127.99993 0,-24.45374 -6.79124,-47.262152 -18.59472,-66.653813 z"
                     />
                     <rect
+                      id="rect13982"
                       style="
                         display: inline;
                         fill: #16aa9a;
@@ -180,7 +181,6 @@ const open = ref(false);
                         stroke-width: 0.264583;
                         stop-color: #000000;
                       "
-                      id="rect13982"
                       width="112.50108"
                       height="27.88588"
                       x="74.669762"
@@ -188,6 +188,7 @@ const open = ref(false);
                       ry="13.942939"
                     />
                     <rect
+                      id="rect13982-8"
                       style="
                         display: inline;
                         fill: #16aa9a;
@@ -195,7 +196,6 @@ const open = ref(false);
                         stroke-width: 0.264583;
                         stop-color: #000000;
                       "
-                      id="rect13982-8"
                       width="112.50108"
                       height="27.88588"
                       x="74.669762"
@@ -203,6 +203,7 @@ const open = ref(false);
                       ry="13.942939"
                     />
                     <rect
+                      id="rect13982-1"
                       style="
                         display: inline;
                         fill: #16aa9a;
@@ -210,7 +211,6 @@ const open = ref(false);
                         stroke-width: 0.208385;
                         stop-color: #000000;
                       "
-                      id="rect13982-1"
                       width="83.735153"
                       height="27.88588"
                       x="74.669762"
@@ -218,6 +218,7 @@ const open = ref(false);
                       ry="13.942939"
                     />
                     <rect
+                      id="rect13982-1-5"
                       style="
                         display: inline;
                         fill: #14988a;
@@ -225,7 +226,6 @@ const open = ref(false);
                         stroke-width: 0.208385;
                         stop-color: #000000;
                       "
-                      id="rect13982-1-5"
                       width="28.592224"
                       height="27.88588"
                       x="129.81268"
@@ -233,6 +233,7 @@ const open = ref(false);
                       ry="12.812758"
                     />
                     <rect
+                      id="rect13982-1-5-0"
                       style="
                         display: inline;
                         fill: #14988a;
@@ -240,7 +241,6 @@ const open = ref(false);
                         stroke-width: 0.208385;
                         stop-color: #000000;
                       "
-                      id="rect13982-1-5-0"
                       width="28.592224"
                       height="27.88588"
                       x="158.57861"
@@ -248,6 +248,7 @@ const open = ref(false);
                       ry="12.812758"
                     />
                     <rect
+                      id="rect13982-1-5-6"
                       style="
                         display: inline;
                         fill: #14988a;
@@ -255,7 +256,6 @@ const open = ref(false);
                         stroke-width: 0.208385;
                         stop-color: #000000;
                       "
-                      id="rect13982-1-5-6"
                       width="28.592224"
                       height="27.88588"
                       x="158.57861"
