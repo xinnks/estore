@@ -4,5 +4,16 @@
   "description": "An ecommerce store monorepo being managed by moon.",
   "keywords": [],
   "author": "James Sinkala <xinnks@gmail.com> (https://jamesinkala.com)",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "17.9.0"
+  },
+  "packageManager": "pnpm@7.8.0",
+  "devDependencies": {
+    "@estore/client": "workspace:^0.0.1",
+    "@estore/server": "workspace:^0.0.1",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1"
+  }
 }
