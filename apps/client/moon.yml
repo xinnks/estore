@@ -1,0 +1,41 @@
+---
+type: "application"
+project:
+  name: "client"
+  description: "Estore's front-end client application"
+  channel: "#moon"
+  owner: "@estore/client"
+  maintainers: ["sinkala.james"]
+language: javascript
+tasks:
+  lint:
+    command: 'eslint'
+    args:
+      - --ext
+      - .js,.vue
+    type: 'node'
+    options:
+      mergeArgs: 'prepend'
+  dev:
+    command: vite
+    args: "--port 3000"
+    deps:
+      - "~:lint"
+      - "~:format"
+    options:
+      runInCI: false
+      outputStyle: "stream"
+    type: node
+  build:
+    command: vite
+    args:
+      - build
+    deps:
+      - "~:lint"
+      - "~:format"
+    type: node
+  preview:
+    command: vite
+    args:
+      - preview
+    type: node
