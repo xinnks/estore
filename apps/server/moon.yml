@@ -1,0 +1,52 @@
+---
+type: "application"
+language: javascript
+project:
+  name: "server"
+  description: "Estore's back-end server application"
+  channel: "#moon"
+  owner: "@estore/server"
+  maintainers: ["sinkala.james"]
+tasks:
+  lint:
+    command: "eslint"
+    args:
+      - --ext
+      - .js
+    type: "node"
+    options:
+      mergeArgs: "prepend"
+  seed:
+    command: node
+    args:
+      - prisma/seed
+    deps:
+      - "~:init"
+    type: node
+  init:
+    command: pnpm
+    args:
+      - dlx
+      - prisma
+      - migrate
+      - dev
+      - "--name"
+      - init
+    type: node
+  dev:
+    command: nodemon
+    deps:
+      - "~:seed"
+      - "~:lint"
+      - "~:format"
+    options:
+      outputStyle: "stream"
+    type: node
+  serve:
+    command: node
+    args:
+      - "src/index.js"
+      - "NODE_ENV=production"
+    deps:
+      - "~:init"
+    type: node
